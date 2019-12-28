@@ -43,7 +43,7 @@ window.addEventListener('load', () => {
     var platform = await initialize()
     midiChannel = await platform.createChannel('midi')
     midiChannel.start()
-    console.log("started!2")
+    console.log("started!3")
   }
   init()
   draw()
@@ -65,22 +65,25 @@ function sendUserEvent(event, type) {
   circles.forEach(circle => {
     if (isIntersect(pos, circle)) {
       console.log("intersection event in: "+circle.id);
-      circle.radius = circle.radius-10;
       midiChannel.postMessage({type: type, pitch: circle.id, velocity: 100});
-      draw();
     }
   });
 }
 
+function paint (canvas) {
+  var ctx = canvas.getContext('2d');
+  circles.forEach(circle => {
+    ctx.beginPath();
+    ctx.arc(circle.x, circle.y, circle.radius*1.5, 0, 2 * Math.PI, false);
+    ctx.fillStyle = circle.color;
+    ctx.fill();
+  });
+
+}
+
 function draw() {
     var canvas = document.getElementById("myCanvas");
-    var ctx = canvas.getContext('2d');
-    circles.forEach(circle => {
-      ctx.beginPath();
-      ctx.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI, false);
-      ctx.fillStyle = circle.color;
-      ctx.fill();
-    });
+    paint (canvas);
 
     canvas.onmousedown = function(e) { sendUserEvent(e, commands.NOTE_ON) };
     canvas.onmouseup = function(e) { sendUserEvent(e, commands.NOTE_OFF) };
