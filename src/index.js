@@ -11,17 +11,10 @@ const circles = [
     color: 'rgb(255,0,0)'
   },
   {
-    id: 60,
-    x: 150,
-    y: 70,
-    radius: 120,
-    color: 'rgb(255,0,0)'
-  },
-  {
     id: 64,
     x: 100,
     y: 170,
-    radius: 50,
+    radius: 300,
     color: 'rgb(0,255,0)'
   },
   {
@@ -50,6 +43,7 @@ window.addEventListener('load', () => {
     var platform = await initialize()
     midiChannel = await platform.createChannel('midi')
     midiChannel.start()
+    console.log("started!")
   }
   init()
   draw()
