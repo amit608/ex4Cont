@@ -1,13 +1,14 @@
 import { initialize } from '@muzilator/sdk';
 
 var midiChannel;
+var shape ="circle";
 
 var circles = [
   {
     id: 60,
     x: 150,
     y: 70,
-    radius: 20,
+    radius: 50,
     color: 'rgb(255,0,0)'
   },
   {
@@ -69,6 +70,13 @@ function sendUserEvent(event, type, i) {
       midiChannel.postMessage({type: type, pitch: circle.id, velocity: 100});
     }
   });
+}
+
+function changeShape(mshape) {
+  var canvas = document.getElementById("myCanvas");
+  shape = mshape;
+  clear(canvas); 
+  paint(canvas);
 }
 
 function paint(canvas) {

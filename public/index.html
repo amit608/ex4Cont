@@ -9,5 +9,26 @@
 </head>
 <body>
   <canvas id="myCanvas" width="500" height="500"></canvas>
+  <table border="0" style="text-align:center;width:580px;">
+    <tr>
+        <td>
+            <button onclick="changeShape('rectangle')" class="moveButtons">Rectangle</button><br><br>
+            <button onclick="changeShape('circle')" class="moveButtons">Circle</button>
+            <button onclick="changeShape('triangle')" class="moveButtons">Triangle</button><br><br>
+        </td>
+        <td>
+            <button onclick="hightP()" class="sizeButtons">+height</button><br><br>
+            <button onclick="widthM()" class="sizeButtons">-width</button>
+            <button onclick="widthP()" class="sizeButtons">+width</button><br><br>
+            <button onclick="hightM()" class="sizeButtons">-height</button>
+        </td>
+        <td>
+            <button onclick="startGame()" class="otherButtons">restart big canvas</button><br><br>
+            <button onclick="startGameSmall()" class="otherButtons">restart small canvas</button><br><br>
+            <button onclick="changeColor()" class="otherButtons">change color</button>
+        </td>
+    </tr>
+
+</table>
 </body>
 </html>

@@ -11,3 +11,19 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.moveButtons {
+  color: white;
+  font-size: 20px;
+  background-color: #4CAF50;
+}
+.sizeButtons {
+  color: white;
+  font-size: 20px;
+  background-color: brown;
+}
+.otherButtons {
+  color: white;
+  font-size: 20px;
+  background-color: rgb(0, 119, 255);
+}
