@@ -51,7 +51,12 @@ window.addEventListener('load', () => {
 })
 
 function isIntersect(point, circle) {
+  if(shape == "circle") {
   return Math.sqrt((point.x-circle.x) ** 2 + (point.y - circle.y) ** 2) < circle.radius;
+  }
+  else {
+    return (point.x-circle.x) < circle.radius  && (point.y - circle.y) < circle.radius;
+  }
 }
 
 function getCurrentPosition(event) {
@@ -72,8 +77,7 @@ function sendUserEvent(event, type, i) {
   });
 }
 
-function changeShape(mshape) {
-  var canvas = document.getElementById("myCanvas");
+function changeShape(mshape, canvas) {
   shape = mshape;
   clear(canvas); 
   paint(canvas);
@@ -83,7 +87,12 @@ function paint(canvas) {
   var ctx = canvas.getContext('2d');
   circles.forEach(circle => {
     ctx.beginPath();
+    if(shape == "circle") {
     ctx.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI, false);
+    }
+    else if(shape == "rectangle") {
+      ctx.rect(circle.x, circle.y, circle.radius, circle.radius);
+    }
     ctx.fillStyle = circle.color;
     ctx.fill();
   });
@@ -95,6 +104,7 @@ function clear(canvas) {
 }
 function draw() {
     var canvas = document.getElementById("myCanvas");
+
     paint (canvas);
 
     canvas.onmousedown = function(e) { 
@@ -112,4 +122,19 @@ function draw() {
     canvas.addEventListener("touchend", function (e) {
       sendUserEvent(e.touches[0], commands.NOTE_OFF, +10)
     }, false);
+
+    var circ = document.getElementById("myCirc");
+    var rect = document.getElementById("myRect");
+    var tria = document.getElementById("myTria");
+
+    circ.onmousedown = (e) => {
+      changeShape("circle", canvas);
+    }
+    rect.onmousedown = (e) => {
+      changeShape("rectangle", canvas);
+    }
+    tria.onmousedown = (e) => {
+      changeShape("triangle", canvas);
+    }
+
 }
