@@ -1,6 +1,7 @@
 import { initialize } from '@muzilator/sdk';
 
 var midiChannel;
+const press = 4;
 var shape ="circle";
 var offset = 0;
 
@@ -9,28 +10,28 @@ var circles = [
     id: 60,
     x: 150,
     y: 70,
-    radius: 60,
+    radius: 50,
     color: 'rgb(255,0,0)'
   },
   {
     id: 64,
     x: 100,
     y: 170,
-    radius: 60,
+    radius: 50,
     color: 'rgb(0,255,0)'
   },
   {
     id: 67,
     x: 210,
     y: 270,
-    radius: 60,
+    radius: 50,
     color: 'rgb(255,0,255)'
   },
   {
     id: 72,
     x: 270,
     y: 160,
-    radius: 60,
+    radius: 50,
     color: 'rgb(255,255,125)'
   }
 ];
@@ -118,19 +119,19 @@ function draw() {
     paint (canvas);
 
     canvas.onmousedown = function(e) { 
-      sendUserEvent(e, commands.NOTE_ON, -6); 
+      sendUserEvent(e, commands.NOTE_ON, -1*press); 
       clear(canvas); 
       
       paint(canvas); 
     };
-    canvas.onmouseup = function(e) { sendUserEvent(e, commands.NOTE_OFF, +6); clear(canvas); paint(canvas);};
+    canvas.onmouseup = function(e) { sendUserEvent(e, commands.NOTE_OFF, press); clear(canvas); paint(canvas);};
 
     canvas.addEventListener("touchstart", function(e) {
-      sendUserEvent(e.touches[0], commands.NOTE_ON, -6)
+      sendUserEvent(e.touches[0], commands.NOTE_ON, -1*press)
     }, false);
 
     canvas.addEventListener("touchend", function (e) {
-      sendUserEvent(e.touches[0], commands.NOTE_OFF, +6)
+      sendUserEvent(e.touches[0], commands.NOTE_OFF, press)
     }, false);
 
     var circ = document.getElementById("myCirc");
@@ -147,7 +148,7 @@ function draw() {
     var down = document.getElementById("myDown");
 
     up.onmousedown = (e) => {
-      changeSize(60, canvas, 0);
+      changeSize(50, canvas, 0);
     }
     down.onmousedown = (e) => {
       changeSize(40, canvas, 10);
