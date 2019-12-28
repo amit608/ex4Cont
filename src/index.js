@@ -60,11 +60,12 @@ function getCurrentPosition(event) {
   };
 }
 
-function sendUserEvent(event, type) {
+function sendUserEvent(event, type, i) {
   const pos = getCurrentPosition(event);
   circles.forEach(circle => {
     if (isIntersect(pos, circle)) {
       console.log("intersection event in: "+circle.id);
+      circle.radius = circle.radius+i;
       midiChannel.postMessage({type: type, pitch: circle.id, velocity: 100});
     }
   });
@@ -88,13 +89,19 @@ function draw() {
     var canvas = document.getElementById("myCanvas");
     paint (canvas);
 
-    canvas.onmousedown = function(e) { sendUserEvent(e, commands.NOTE_ON); clear(canvas) };
-    canvas.onmouseup = function(e) { sendUserEvent(e, commands.NOTE_OFF); paint(canvas);};
+    canvas.onmousedown = function(e) { 
+      sendUserEvent(e, commands.NOTE_ON, -10); 
+      clear(canvas); 
+      
+      paint(canvas); 
+    };
+    canvas.onmouseup = function(e) { sendUserEvent(e, commands.NOTE_OFF, +10); clear(canvas); paint(canvas);};
+
     canvas.addEventListener("touchstart", function(e) {
-      sendUserEvent(e.touches[0], commands.NOTE_ON)
+      sendUserEvent(e.touches[0], commands.NOTE_ON, -10)
     }, false);
 
     canvas.addEventListener("touchend", function (e) {
-      sendUserEvent(e.touches[0], commands.NOTE_OFF)
+      sendUserEvent(e.touches[0], commands.NOTE_OFF, +10)
     }, false);
 }
