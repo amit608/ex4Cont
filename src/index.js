@@ -64,7 +64,7 @@ function sendUserEvent(event, type) {
   const pos = getCurrentPosition(event);
   circles.forEach(circle => {
     if (isIntersect(pos, circle)) {
-      Console.log("intersection event in: "+circle.id);
+      console.log("intersection event in: "+circle.id);
       circle.radius = circle.radius-10;
       midiChannel.postMessage({type: type, pitch: circle.id, velocity: 100});
       draw();
