@@ -55,7 +55,7 @@ function isIntersect(point, circle) {
   return Math.sqrt((point.x-circle.x) ** 2 + (point.y - circle.y) ** 2) < circle.radius;
   }
   else {
-    return (point.x-circle.x) < circle.radius  && (point.y - circle.y) < circle.radius;
+    return (point.y-circle.y) > 0 && (point.x-circle.x) > 0 && (point.x-circle.x) < circle.radius  && (point.y - circle.y) < circle.radius;
   }
 }
 
@@ -108,19 +108,19 @@ function draw() {
     paint (canvas);
 
     canvas.onmousedown = function(e) { 
-      sendUserEvent(e, commands.NOTE_ON, -10); 
+      sendUserEvent(e, commands.NOTE_ON, -6); 
       clear(canvas); 
       
       paint(canvas); 
     };
-    canvas.onmouseup = function(e) { sendUserEvent(e, commands.NOTE_OFF, +10); clear(canvas); paint(canvas);};
+    canvas.onmouseup = function(e) { sendUserEvent(e, commands.NOTE_OFF, +6); clear(canvas); paint(canvas);};
 
     canvas.addEventListener("touchstart", function(e) {
-      sendUserEvent(e.touches[0], commands.NOTE_ON, -10)
+      sendUserEvent(e.touches[0], commands.NOTE_ON, -6)
     }, false);
 
     canvas.addEventListener("touchend", function (e) {
-      sendUserEvent(e.touches[0], commands.NOTE_OFF, +10)
+      sendUserEvent(e.touches[0], commands.NOTE_OFF, +6)
     }, false);
 
     var circ = document.getElementById("myCirc");
