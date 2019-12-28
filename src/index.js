@@ -43,7 +43,7 @@ window.addEventListener('load', () => {
     var platform = await initialize()
     midiChannel = await platform.createChannel('midi')
     midiChannel.start()
-    console.log("started!")
+    console.log("started!2")
   }
   init()
   draw()
@@ -67,6 +67,7 @@ function sendUserEvent(event, type) {
       Console.log("intersection event in: "+circle.id);
       circle.radius = circle.radius-10;
       midiChannel.postMessage({type: type, pitch: circle.id, velocity: 100});
+      draw();
     }
   });
 }
