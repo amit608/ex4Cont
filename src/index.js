@@ -83,7 +83,7 @@ function changeShape(mshape, canvas) {
   paint(canvas);
 }
 
-function changeSize(i, canvas) {
+function changeSize(i, canvas, circles) {
   circles.forEach(circle => {
       circle.radius = i;
   });
@@ -149,10 +149,10 @@ function draw() {
     var down = document.getElementById("myDown");
 
     up.onmousedown = (e) => {
-      changeSize(50, canvas);
+      changeSize(50, canvas, circles);
     }
     down.onmousedown = (e) => {
-      changeSize(35, canvas);
+      changeSize(35, canvas, circles);
     }
 
 }
