@@ -83,7 +83,7 @@ function changeShape(mshape, canvas) {
   paint(canvas);
 }
 
-function changeSize(i, canvas, circles) {
+function changeSize(i, canvas) {
   circles.forEach(circle => {
       circle.radius = i;
   });
@@ -133,7 +133,6 @@ function draw() {
 
     var circ = document.getElementById("myCirc");
     var rect = document.getElementById("myRect");
-    var tria = document.getElementById("myTria");
 
     circ.onmousedown = (e) => {
       changeShape("circle", canvas);
@@ -141,18 +140,15 @@ function draw() {
     rect.onmousedown = (e) => {
       changeShape("rectangle", canvas);
     }
-    tria.onmousedown = (e) => {
-      changeShape("triangle", canvas);
-    }
 
     var up = document.getElementById("myUp");
     var down = document.getElementById("myDown");
 
     up.onmousedown = (e) => {
-      changeSize(50, canvas, circles);
+      changeSize(50, canvas);
     }
     down.onmousedown = (e) => {
-      changeSize(35, canvas, circles);
+      changeSize(35, canvas);
     }
 
 }
