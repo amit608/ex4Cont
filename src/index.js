@@ -2,34 +2,35 @@ import { initialize } from '@muzilator/sdk';
 
 var midiChannel;
 var shape ="circle";
+var offset = 0;
 
 var circles = [
   {
     id: 60,
     x: 150,
     y: 70,
-    radius: 50,
+    radius: 60,
     color: 'rgb(255,0,0)'
   },
   {
     id: 64,
     x: 100,
     y: 170,
-    radius: 50,
+    radius: 60,
     color: 'rgb(0,255,0)'
   },
   {
     id: 67,
     x: 210,
     y: 270,
-    radius: 50,
+    radius: 60,
     color: 'rgb(255,0,255)'
   },
   {
     id: 72,
     x: 270,
     y: 160,
-    radius: 50,
+    radius: 60,
     color: 'rgb(255,255,125)'
   }
 ];
@@ -72,7 +73,7 @@ function sendUserEvent(event, type, i) {
     if (isIntersect(pos, circle)) {
       console.log("intersection event in: "+circle.id);
       circle.radius = circle.radius+i;
-      midiChannel.postMessage({type: type, pitch: circle.id, velocity: 100});
+      midiChannel.postMessage({type: type, pitch: circle.id+offset, velocity: 100});
     }
   });
 }
@@ -83,10 +84,11 @@ function changeShape(mshape, canvas) {
   paint(canvas);
 }
 
-function changeSize(i, canvas) {
+function changeSize(i, canvas, offs) {
   circles.forEach(circle => {
       circle.radius = i;
   });
+  offset = offs;
   clear(canvas); 
   paint(canvas);
 }
@@ -145,10 +147,10 @@ function draw() {
     var down = document.getElementById("myDown");
 
     up.onmousedown = (e) => {
-      changeSize(50, canvas);
+      changeSize(60, canvas, 0);
     }
     down.onmousedown = (e) => {
-      changeSize(35, canvas);
+      changeSize(40, canvas, 10);
     }
 
 }
