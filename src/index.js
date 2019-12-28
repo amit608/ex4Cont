@@ -2,7 +2,7 @@ import { initialize } from '@muzilator/sdk';
 
 var midiChannel;
 
-const circles = [
+var circles = [
   {
     id: 60,
     x: 150,
@@ -64,6 +64,8 @@ function sendUserEvent(event, type) {
   const pos = getCurrentPosition(event);
   circles.forEach(circle => {
     if (isIntersect(pos, circle)) {
+      Console.log("intersection event in: "+circle.id);
+      circle.radius = circle.radius-10;
       midiChannel.postMessage({type: type, pitch: circle.id, velocity: 100});
     }
   });
