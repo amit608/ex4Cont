@@ -43,7 +43,7 @@ window.addEventListener('load', () => {
     var platform = await initialize()
     midiChannel = await platform.createChannel('midi')
     midiChannel.start()
-    console.log("started!4")
+    console.log("started!5")
   }
   init()
   draw()
@@ -70,7 +70,7 @@ function sendUserEvent(event, type) {
   });
 }
 
-function paint (canvas) {
+function paint(canvas) {
   var ctx = canvas.getContext('2d');
   circles.forEach(circle => {
     ctx.beginPath();
@@ -80,15 +80,15 @@ function paint (canvas) {
   });
 
 }
-function clear (canvas) {
+function clear(canvas) {
   var ctx = canvas.getContext('2d');
-  ctx.clear();
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 function draw() {
     var canvas = document.getElementById("myCanvas");
     paint (canvas);
 
-    canvas.onmousedown = function(e) { sendUserEvent(e, commands.NOTE_ON); clear (canvas) };
+    canvas.onmousedown = function(e) { sendUserEvent(e, commands.NOTE_ON); clear(canvas) };
     canvas.onmouseup = function(e) { sendUserEvent(e, commands.NOTE_OFF); paint(canvas);};
     canvas.addEventListener("touchstart", function(e) {
       sendUserEvent(e.touches[0], commands.NOTE_ON)
