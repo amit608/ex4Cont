@@ -83,6 +83,14 @@ function changeShape(mshape, canvas) {
   paint(canvas);
 }
 
+function changeSize(i, canvas) {
+  circles.forEach(circle => {
+      circle.radius = i;
+  });
+  clear(canvas); 
+  paint(canvas);
+}
+
 function paint(canvas) {
   var ctx = canvas.getContext('2d');
   circles.forEach(circle => {
@@ -135,6 +143,16 @@ function draw() {
     }
     tria.onmousedown = (e) => {
       changeShape("triangle", canvas);
+    }
+
+    var up = document.getElementById("myUp");
+    var down = document.getElementById("myDown");
+
+    up.onmousedown = (e) => {
+      changeSize(50, canvas);
+    }
+    down.onmousedown = (e) => {
+      changeSize(35, canvas);
     }
 
 }
