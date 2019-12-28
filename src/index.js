@@ -14,7 +14,7 @@ const circles = [
     id: 64,
     x: 100,
     y: 170,
-    radius: 300,
+    radius: 50,
     color: 'rgb(0,255,0)'
   },
   {
