@@ -7,7 +7,7 @@ const circles = [
     id: 60,
     x: 150,
     y: 70,
-    radius: 120,
+    radius: 20,
     color: 'rgb(255,0,0)'
   },
   {
